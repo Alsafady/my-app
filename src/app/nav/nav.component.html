@@ -1,0 +1,118 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="(isHandset$ | async) === false">
+
+
+
+
+
+    <img src=" {{ logo }} " />
+
+
+
+    <mat-toolbar>Menu</mat-toolbar>
+
+    <mat-nav-list>
+      <a routerLinkActive="active" mat-list-item routerLink="about">About</a>
+      <a routerLinkActive="active" mat-list-item routerLink="#">Show list</a>
+      <a routerLinkActive="active" mat-list-item routerLink="contact">Contact</a>
+    </mat-nav-list>
+
+
+    <button mat-mini-fab color="primary" (click)="increase_x()" aria-label="Example icon button with a plus one icon">
+      <mat-icon>plus_one</mat-icon>
+    </button>
+
+
+    <button mat-mini-fab color="primary" (click)="change_logo()" aria-label="Example icon button with a plus one icon">
+      <mat-icon>filter_list</mat-icon>
+    </button>
+
+
+
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()">
+<!--        *ngIf="isHandset$ | async">-->
+
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+
+      </button>
+
+
+<!--
+      <button mat-icon-button  (click)="drawer.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+-->
+
+
+
+      <span>{{ website_name | uppercase }} , {{ 'ahmed' | uppercase }}</span>
+
+
+      <span class="example-spacer"></span>
+
+
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+
+
+
+
+      <mat-menu #menu="matMenu">
+
+        <button *ngIf="user_loggedin" (click)="login()" mat-menu-item>
+          <mat-icon>people</mat-icon>
+          <span>Sign in</span>
+        </button>
+
+        <button *ngIf="user_loggedin" mat-menu-item>
+          <mat-icon>person_add</mat-icon>
+          <span>Sign Up</span>
+        </button>
+
+        <button *ngIf="user_loggedin" mat-menu-item>
+          <mat-icon>restart_alt</mat-icon>
+          <span>Reset Password</span>
+        </button>
+
+
+        <button *ngIf="!user_loggedin" mat-menu-item>
+          <mat-icon>manage_accounts</mat-icon>
+          <span>My Profile</span>
+        </button>
+
+
+        <button *ngIf="!user_loggedin" (click)="logout()" mat-menu-item>
+          <mat-icon>logout</mat-icon>
+          <span>Log out</span>
+        </button>
+
+
+      </mat-menu>
+
+
+
+
+
+
+
+    </mat-toolbar>
+    <!-- Add Content Here -->
+
+
+    <router-outlet></router-outlet>
+
+
+
+  </mat-sidenav-content>
+</mat-sidenav-container>
